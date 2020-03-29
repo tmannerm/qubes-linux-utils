@@ -1,10 +1,15 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
+# SUSE doesn't have python3_pkgversion macro
+%if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
+%global python3_pkgversion 3
+%endif
+
 Name:		qubes-utils
 Version:	@VERSION@
 Release:	1%{?dist}
 Summary:	Common Linux files for Qubes Dom0 and VM
-Source0:    %{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 
 Group:		Qubes
 License:	GPL
@@ -32,7 +37,7 @@ Requires:	%{name}-libs
 Development header and files for qubes-utils
 
 %package libs
-Summary: Qubes utils libraries
+Summary:	Qubes utils libraries
 Release:	1%{?dist}
 
 %description libs
