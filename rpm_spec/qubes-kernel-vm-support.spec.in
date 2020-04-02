@@ -18,19 +18,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-Name:		qubes-kernel-vm-support
-Version:	@VERSION@
-Release:	1%{?dist}
-Summary:	Qubes VM initramfs modules
-Source0:	qubes-utils-%{version}.tar.gz
+Name:       qubes-kernel-vm-support
+Version:    @VERSION@
+Release:    1%{?dist}
+Summary:    Qubes VM initramfs modules
+Source0:    qubes-utils-%{version}.tar.gz
 
-Group:		Qubes
-Vendor:	Invisible Things Lab
-License:	GPL v2 only
-URL:		http://www.qubes-os.org
+Group:      Qubes
+Vendor:     Invisible Things Lab
+License:    GPL v2 only
+URL:        http://www.qubes-os.org
 
-Requires:	dracut
-Requires:	dkms
+Requires:   dracut
+Requires:   dkms
 
 %description
 This package contains:
@@ -58,9 +58,9 @@ make install-fedora-kernel-support DESTDIR=%{buildroot}
 
 %triggerin -- grub2-tools
 if ! grep -q '/etc/default/grub.qubes-kernel-vm-support$' /etc/default/grub 2>/dev/null; then
-	# do not keep Qubes-related settings directly in user-controlled config,
-	# include another file
-	echo '. /etc/default/grub.qubes-kernel-vm-support' >> /etc/default/grub
+    # do not keep Qubes-related settings directly in user-controlled config,
+    # include another file
+    echo '. /etc/default/grub.qubes-kernel-vm-support' >> /etc/default/grub
 fi
 
 %post
@@ -70,26 +70,26 @@ dkms add -m u2mfn -v %{version} --rpm_safe_upgrade
 dkms remove -m u2mfn -v %{version} --all --rpm_safe_upgrade
 
 if [ $1 -eq 0 ]; then
-	if grep -q '/etc/default/grub.qubes-kernel-vm-support$' /etc/default/grub 2>/dev/null; then
-		sed -i -e '/grub.qubes-kernel-vm-support$/d' /etc/default/grub
-	fi
+    if grep -q '/etc/default/grub.qubes-kernel-vm-support$' /etc/default/grub 2>/dev/null; then
+        sed -i -e '/grub.qubes-kernel-vm-support$/d' /etc/default/grub
+    fi
 fi
 
 %posttrans
 
 # Rebuild all initramfs images to include updated modules
 if [ -r /usr/share/qubes/marker-vm ] && [ -x /usr/bin/dracut ]; then
-	ret=0
-	for img in /boot/initramfs-*.img; do
-		kver="${img#*initramfs-}"
-		kver="${kver%.img}"
-		dracut -f "$img" "$kver" || ret=$?
-	done
-	if [ "$ret" -eq 0 ]; then
-		# "milestone" initramfs update version:
-		# 1 - addition of xen scrub_pages enabling code
-		echo 1 > /var/lib/qubes/initramfs-updated
-	fi
+    ret=0
+    for img in /boot/initramfs-*.img; do
+        kver="${img#*initramfs-}"
+        kver="${kver%.img}"
+        dracut -f "$img" "$kver" || ret=$?
+    done
+    if [ "$ret" -eq 0 ]; then
+        # "milestone" initramfs update version:
+        # 1 - addition of xen scrub_pages enabling code
+        echo 1 > /var/lib/qubes/initramfs-updated
+    fi
 fi
 
 %changelog
