@@ -5,40 +5,40 @@
 %global python3_pkgversion 3
 %endif
 
-Name:		qubes-utils
-Version:	@VERSION@
-Release:	1%{?dist}
-Summary:	Common Linux files for Qubes Dom0 and VM
-Source0:	%{name}-%{version}.tar.gz
+Name:       qubes-utils
+Version:    @VERSION@
+Release:    1%{?dist}
+Summary:    Common Linux files for Qubes Dom0 and VM
+Source0:    %{name}-%{version}.tar.gz
 
-Group:		Qubes
-License:	GPL
-URL:		http://www.qubes-os.org
+Group:      Qubes
+License:    GPL
+URL:        http://www.qubes-os.org
 
-Requires:	udev
-Requires:	%{name}-libs
-Requires:	ImageMagick
-Requires:	pycairo
+Requires:   udev
+Requires:   %{name}-libs
+Requires:   ImageMagick
+Requires:   pycairo
 BuildRequires:  qubes-libvchan-devel
 # for meminfo-writer
 BuildRequires:  xen-devel
 BuildRequires:  python-devel
-Provides: python2-qubesimgconverter = %{version}-%{release}
+Provides:       python2-qubesimgconverter = %{version}-%{release}
 
 %description
 Common Linux files for Qubes Dom0 and VM
 
 %package devel
-Summary:	Development headers for qubes-utils
-Release:	1%{?dist}
-Requires:	%{name}-libs
+Summary:        Development headers for qubes-utils
+Release:        1%{?dist}
+Requires:       %{name}-libs
 
 %description devel
 Development header and files for qubes-utils
 
 %package libs
-Summary:	Qubes utils libraries
-Release:	1%{?dist}
+Summary:        Qubes utils libraries
+Release:        1%{?dist}
 
 %description libs
 Libraries for qubes-utils
