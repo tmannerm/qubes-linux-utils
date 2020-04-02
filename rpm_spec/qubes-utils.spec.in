@@ -3,60 +3,60 @@
 %global python3_pkgversion 3
 %endif
 
-Name:		qubes-utils
-Version:	@VERSION@
-Release:	1%{?dist}
-Summary:	Common Linux files for Qubes Dom0 and VM
-Source0:	%{name}-%{version}.tar.gz
+Name:           qubes-utils
+Version:        @VERSION@
+Release:        1%{?dist}
+Summary:        Common Linux files for Qubes Dom0 and VM
+Source0:        %{name}-%{version}.tar.gz
 
-Group:		Qubes
-License:	GPL
-URL:		http://www.qubes-os.org
+Group:          Qubes
+License:        GPL
+URL:            http://www.qubes-os.org
 
-Requires:	udev
-Requires:	%{name}-libs
-Requires:	ImageMagick
-Requires:	python%{python3_pkgversion}-qubesimgconverter
+Requires:       udev
+Requires:       %{name}-libs
+Requires:       ImageMagick
+Requires:       python%{python3_pkgversion}-qubesimgconverter
 %{?systemd_requires}
-BuildRequires:	systemd
-BuildRequires:	python%{python3_pkgversion}-setuptools
+BuildRequires:  systemd
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
-BuildRequires:	python-rpm-macros
+BuildRequires:  python-rpm-macros
 %else
-BuildRequires:	python3-rpm-macros
+BuildRequires:  python3-rpm-macros
 %endif
 # for meminfo-writer
-BuildRequires:	xen-devel
-BuildRequires:	gcc
+BuildRequires:  xen-devel
+BuildRequires:  gcc
 
 %description
 Common Linux files for Qubes Dom0 and VM
 
 %package -n python%{python3_pkgversion}-qubesimgconverter
-Summary:	Python package qubesimgconverter
-Requires:	python%{python3_pkgversion}
-Requires:	python%{python3_pkgversion}-cairo
+Summary:        Python package qubesimgconverter
+Requires:       python%{python3_pkgversion}
+Requires:       python%{python3_pkgversion}-cairo
 %if 0%{?suse_version} == 1500 && 0%{?is_opensuse}
-Requires:	python3-Pillow
+Requires:       python3-Pillow
 %else
-Requires:	python%{python3_pkgversion}-pillow
+Requires:       python%{python3_pkgversion}-pillow
 %endif
-Requires:	python%{python3_pkgversion}-numpy
+Requires:       python%{python3_pkgversion}-numpy
 
 %description -n python%{python3_pkgversion}-qubesimgconverter
 Python package qubesimgconverter
 
 %package devel
-Summary:	Development headers for qubes-utils
-Release:	1%{?dist}
-Requires:	%{name}-libs
+Summary:        Development headers for qubes-utils
+Release:        1%{?dist}
+Requires:       %{name}-libs
 
 %description devel
 Development header and files for qubes-utils
 
 %package libs
-Summary:	Qubes utils libraries
-Release:	1%{?dist}
+Summary:        Qubes utils libraries
+Release:        1%{?dist}
 
 %description libs
 Libraries for qubes-utils
